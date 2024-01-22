@@ -1,0 +1,56 @@
+root
+|-- src
+    |-- reddit_scraper.py (probably will be multiple files)
+        -> Scrape reddit posts (mainly from r/survivor) to get info about contestants/seasons/etc.
+            -> Current season: Each week, there's a pinned post where people rate contestants and talk about how they did. Scrape/analyze this weekly.
+            -> Current season: Each week, someone usually posts a table of the contestants' "edit" (screen time). Update this weekly.
+        -> Clean up data
+        -> Store data
+    |-- NLP/AI .py file
+        -> Analyze reddit data
+        -> NLP/AI to analyze how players are doing in different categories.
+    |-- prediction .py file
+        -> Automated web-extraction for current season data, update current season database with new data, and make a prediction.
+|-- data
+    |-- data files (probably will use PostgreSQL)
+|-- models
+    |-- trained models
+
+----------------------------------------------------------------
+
+ML Data Model Examples:
+
+Table: Season16
++-----------------+---------+
+| Column Name     | Type    |
++-----------------+---------+
+| name            | varchar |
+| ranking         | int     | Y/Output column
+| edit_time       | int     |
+| num_idols       | int     | <- May want to analyze the correlation b/w WHEN the player has an idol and their ranking. Also, maybe track how long idol is good for.
+| social_strength | int     |      ^ Maybe also track how many people know about the idols? There's a lot of elements to this component; will need to carefully design for it.
+| challenge_skill | int     |
+| challenges_won  | int     |
++-----------------+---------+
+
+Note: Might want to make challenges_won be individual_challenges_won, then also add a col for team_challenges_won and col for making it to the tribe merge.
+      It may make the most sense to first predict who will make it to the merge, THEN predict rankings after that.
+      This seems to make the most sense, as factors influencing elimination change dramatically pre and post-merge.
+
+      If implementing this approach, then add a col for "merge" (type bool) to the table above, and have it be populated pre-merge by a SECOND ML model on table:
+
+Table: Season16Merge                                        Table: Season16Overall
++-----------------------+---------+                           +---------------------------+---------+
+| Column Name           | Type    |                           | Column Name               | Type    |
++-----------------------+---------+                           +---------------------------+---------+
+| name                  | varchar |                           | name                      | varchar |
+| ranking               | int     |                           | ranking                   | int     | Y/Output column
+| edit_time             | int     |                           | edit_time                 | int     | 
+| num_idols             | int     |                           | num_idols                 | int     |
+| social_strength       | int     |                           | social_strength           | int     |
+| challenge_skill       | int     |                           | challenge_skill           | int     |
+| team_challenges_won   | int     |                           | individual_challenges_won | int     |
+| merge                 | bool    | Y/Output column           | merge                     | bool    |
+| tribe_challenge_skill | int     |                           +---------------------------+---------+
+| tribe_mates_remaining | int     |
++-----------------------+---------+
