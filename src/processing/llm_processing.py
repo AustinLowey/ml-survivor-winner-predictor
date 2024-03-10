@@ -35,12 +35,7 @@ def ai_analyze_contestants(contestant_description: str) -> Tuple[int, int]:
     ]
     )
 
-    # Parse the API call results
-    ratings = ai_result.choices[0].message.content.split(", ")
-    social_score = int(ratings[0].split("=")[1])
-    strategy_score = int(ratings[1].split("=")[1])
-
-    return social_score, strategy_score
+    return ai_result.choices[0].message.content
 
 
 if __name__ == "__main__":
@@ -51,5 +46,5 @@ if __name__ == "__main__":
     negate a unanimous vote against him at the merge. His luck would eventually run out, however, as his
     threat status and burnt bridges with the Reba Four sealed his fate at the Double Elimination.
     """
-    social_score, strategy_score = ai_analyze_contestants(test_description)
-    print(social_score, strategy_score)
+    ai_result_msg = ai_analyze_contestants(test_description)
+    print(ai_result_msg)
