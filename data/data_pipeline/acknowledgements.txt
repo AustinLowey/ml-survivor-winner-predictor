@@ -1,0 +1,3 @@
+Confessionals data from: https://gradientdescending.com/survivor/tables/confessionals.html
+Idols data from: https://www.truedorktimes.com/survivor/boxscores/idolsfound-season.htm
+Other contestant and season data from: https://survivor.fandom.com/wiki/
