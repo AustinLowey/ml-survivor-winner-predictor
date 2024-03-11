@@ -28,4 +28,4 @@ Tools:
   - PostgreSQL
   - pgAdmin
  
-# More coming soon
+# More coming soon...
