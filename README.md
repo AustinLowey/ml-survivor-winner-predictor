@@ -1,7 +1,7 @@
 # Survivor Winner Predictor
 Uses machine learning to predict the winner of the reality competition TV show, Survivor.
 
-Key Components:
+## Key Components:
 - **Data Collection/Storage** (Python: pandas, Beautiful Soup, psycopg2 / Database: PostgreSQL, pgAdmin)
   - Mass web scraping/parsing of the Survivor Wiki for data on ~700 contestants across 45 seasons
   - Supplemented with immunity idols and contestant confessionals data
@@ -19,7 +19,7 @@ Key Components:
 - **Model Iteration/Refinement**
   - Depending on model performance, will likely revisit and refine the "num_idols_possessed" feature, as well as potentially add/refine any other features
  
-Tools:
+## Tools:
 - Python
   - scikit-learn
   - pandas
