@@ -7,7 +7,7 @@ Key Components:
   - Supplemented with immunity idols and contestant confessionals data
 - **Feature Engineering** (Python: pandas, OpenAI API)
   - Automated LLM-analysis of players' Wiki descriptions/summaries (for each individual season) into social and strategy scores (b/w 1-10)
-  - Normalized data as needed across a season, as predictions for current season will be made week-to-week
+  - Normalized data as needed across historical seasons, as predictions for current season will be made week-to-week
     - Ex #1: num_confessionals -> confessionals_per_epi
     - Ex #2: challenge_wins -> challenge_wins_per_day_lasted
 - **ML model training** (Python: scitkit-learn)
