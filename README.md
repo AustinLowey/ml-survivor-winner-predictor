@@ -2,7 +2,7 @@
 Uses machine learning to predict the winner of the reality competition TV show, Survivor.
 
 ## Key Components:
-- **Data Collection/Storage** (Python: pandas, Beautiful Soup, psycopg2 / Database: PostgreSQL, pgAdmin)
+- **Data Collection/Storage** (Python: pandas, Beautiful Soup, psycopg2. Databases: PostgreSQL, pgAdmin)
   - Mass web scraping/parsing of the Survivor Wiki for data on ~700 contestants across 45 seasons
   - Supplemented with immunity idols and contestant confessionals data
 - **Feature Engineering** (Python: pandas, OpenAI API)
