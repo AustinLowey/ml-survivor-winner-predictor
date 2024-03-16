@@ -26,7 +26,7 @@ Uses machine learning to predict the winner of the reality competition TV show, 
   - Beautiful Soup / requests
   - psycopg2
   - openai (LLM API)
-- Database
+- Databases
   - PostgreSQL
   - pgAdmin
  
