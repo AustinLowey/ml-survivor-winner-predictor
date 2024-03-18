@@ -230,6 +230,77 @@ def scrape_contestant_page(contestant_url: str) -> Tuple[int, str, int]:
             challenge_wins = None
 
     return num_seasons, description, challenge_wins
+
+
+def update_contestants_table_with_days_lasted(table_name: str):
+    """Updates contestants SQL table for a specific season, adding: days_lasted."""
+    postgres_pw = os.getenv('POSTGRESQL_PASSWORD')
+    conn = pg2.connect(database='survivor', user='postgres', password=postgres_pw)
+    cur = conn.cursor()
+
+    # Check and add columns if they do not exist
+    add_columns_query = f"""
+    DO $$
+    BEGIN
+        IF NOT EXISTS (
+            SELECT FROM information_schema.columns 
+            WHERE table_name = '{table_name}' AND 
+            column_name = 'days_lasted'
+        ) THEN ALTER TABLE {table_name} ADD COLUMN days_lasted INTEGER;
+        END IF;
+    END
+    $$;
+    """
+    cur.execute(add_columns_query)
+
+    # Directly format the table name into the query string
+    # (table_name is controlled, so don't need to worry about SQL injection)
+    query = f"SELECT id, wiki_link FROM {table_name}"
+    cur.execute(query)
+    contestants = cur.fetchall()
+
+    # For every contestant in the season, scrape their wiki page, then update database
+    for contestant_id, wiki_link in contestants:
+        try:
+            days_lasted = scrape_days_lasted(wiki_link)
+            update_query = f"""
+            UPDATE {table_name}
+            SET days_lasted = %s
+            WHERE id = %s
+            """
+            cur.execute(update_query, (days_lasted, contestant_id))
+        except Exception as e:
+            print(f"Error updating contestant {contestant_id}: {e}")
+            continue
+
+    # Commit the updates then close the cursor and connection
+    conn.commit()
+    cur.close()
+    conn.close()
+    print(f"Table {table_name} updated successfully.")
+
+
+def scrape_days_lasted(contestant_url: str) -> int:
+    """Scrape wiki page and return number of seasons, description/summary info, and num challenge wins."""
+    response = requests.get(contestant_url)
+    web_page = response.content
+    soup = BeautifulSoup(web_page, 'html.parser')
+
+    # Find number of seasons contestant played. I.e., # of <nav> elements with below class and attrs
+    nav_elements = soup.find_all('nav', class_='pi-navigation', attrs={'data-item-name': 'season'})
+    num_seasons = len(nav_elements)
+
+    if num_seasons > 1: # Data is in different spot on web page. May just manually sort for these cases.
+        days_lasted = None
+    else:
+        # Find and extract number of days lasted
+        days_lasted_tag = soup.find('div', attrs={'data-source': 'days'})
+        if days_lasted_tag:
+            days_lasted = days_lasted_tag.find('div', class_='pi-data-value pi-font').get_text().split('/')[0].strip()
+        else:
+            days_lasted = None
+
+    return days_lasted
     
 
 if __name__ == "__main__":
@@ -241,4 +312,5 @@ if __name__ == "__main__":
     #     create_sql_table(i + 1, df_contestants)
     table_names = get_all_table_names('seasons')
     for table_name in table_names:
-        update_contestants_table_with_wiki_info(table_name)
+        # update_contestants_table_with_wiki_info(table_name)
+        update_contestants_table_with_days_lasted(table_name)

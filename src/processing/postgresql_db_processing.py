@@ -1,5 +1,6 @@
 import os
 
+import pandas as pd
 import psycopg2 as pg2
 
 from src.processing.llm_processing import ai_analyze_contestants
@@ -140,22 +141,103 @@ def copy_table(source_table: str, new_table: str) -> None:
         conn.close()
 
 
+def update_confessionals(table_name: str, season_data: pd.Series):
+    postgres_pw = os.getenv('POSTGRESQL_PASSWORD')
+    try:
+        conn = pg2.connect(database='survivor', user='postgres', password=postgres_pw)
+        conn.autocommit = True
+        cur = conn.cursor()
 
+        # Iterate through each row in the season_data Series and update the database
+        for idx, value in season_data.items():
+            if pd.isna(value): # Skip NaN values
+                continue
+
+            row_id = idx + 1 # Python 0-indexing vs SQL 1-indexing
+            
+            # Construct SQL query to update 'confessionals_per_epi' column
+            query = f"UPDATE seasons.{table_name} SET confessionals_per_epi = %s WHERE ranking = %s;"
+            cur.execute(query, (value, row_id))
+
+        print(f"Updated confessional counts for {table_name}.")
+
+    except Exception as e:
+        print(f"An error occurred while updating {table_name}: {e}")
+
+    finally:
+        cur.close()
+        conn.close()
+
+
+def drop_column_from_table(table_name: str, column_name: str):
+    try:
+        postgres_pw = os.getenv('POSTGRESQL_PASSWORD') 
+        conn = pg2.connect(database="survivor", user="postgres", password=postgres_pw)
+        conn.autocommit = True
+        cur = conn.cursor()
+        cur.execute(f"ALTER TABLE {table_name} DROP COLUMN IF EXISTS {column_name};")
+        print(f"Column '{column_name}' dropped from table '{table_name}'.")
+    except Exception as e:
+        print(f"Could not drop column '{column_name}' from table '{table_name}': {e}")
+    finally:
+        if conn:
+            cur.close()
+            conn.close()
+
+
+def add_challenges_amortized_column(table_name: str):
+    # Connect to the PostgreSQL database
+    postgres_pw = os.getenv('POSTGRESQL_PASSWORD') 
+    conn = pg2.connect(database="survivor", user="postgres", password=postgres_pw)
+    cur = conn.cursor()
+
+    try:
+        # Add a new column
+        cur.execute(f"ALTER TABLE {table_name} ADD COLUMN challenge_wins_per_day_lasted DECIMAL(10, 2)")
+
+        # Calculate and update the new column for each row in the table
+        cur.execute(f"SELECT id, challenge_wins, days_lasted FROM {table_name}")
+        rows = cur.fetchall()
+        for row in rows:
+            contestant_id, challenge_wins, days_lasted = row
+            if days_lasted != 0:
+                challenge_wins_per_day_lasted = challenge_wins / days_lasted
+            else:
+                challenge_wins_per_day_lasted = None
+            cur.execute(f"UPDATE {table_name} SET challenge_wins_per_day_lasted = %s WHERE id = %s", (challenge_wins_per_day_lasted, contestant_id))
+        
+        # Commit the transaction and close the cursor and connection
+        conn.commit()
+        print(f"Column 'challenge_wins_per_day_lasted' added successfully to {table_name}.")
+    except pg2.Error as e:
+        print("Error:", e)
+    finally:
+        cur.close()
+        conn.close()
 
 
 if __name__ == "__main__":
     schema = 'seasons'
     table_names = get_all_table_names(schema)
+    # df_confessionals = pd.read_csv("data/data_pipeline/confessionals_by_season.csv")
 
     ### Test table: ###
     # copy_table('seasons.season_1_contestants', 'seasons.season_0_contestants') # for testing
     # add_column_with_initial_value('seasons.season_0_contestants', 'num_idols_possessed')
     # update_contestant_scores('seasons.season_0_contestants')
     # add_ranking_column('seasons.season_0_contestants')
+    # add_challenges_amortized_column('seasons.season_0_contestants')
+    
           
     for i, table_name in enumerate(table_names):
+        season_number = i + 1 # Otherwise they update in non-sequential order
         # update_contestant_scores(table_name)
-        # print(f"Finished iterating through {i + 1} tables.")
+        # print(f"Finished iterating through {season_number} tables.")
         # add_column_with_initial_value(table_name, 'num_idols_possessed')
         # add_ranking_column(table_name)
-        pass
+        # drop_column_from_table(table_name, 'other_seasons')
+        
+        # table_name = f"season_{season_number}_contestants"
+        # season_column = f"season{season_number}"
+        # update_confessionals(table_name, df_confessionals[season_column])
+        add_challenges_amortized_column(table_name)
