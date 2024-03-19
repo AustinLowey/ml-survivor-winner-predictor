@@ -17,7 +17,7 @@ Uses machine learning to predict the winner of the reality competition TV show, 
       
       <img src="assets/img/linear-prob-trans-function.png" width="300">
       
-    - Initial expontential decay α-value of 0.2:
+    - Initial expontential decay α-value of 0.2 was chosen as ideal for this problem space:
       
       <img src="assets/img/exp-decay-alpha.png" width="600">
       
