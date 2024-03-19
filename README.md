@@ -10,11 +10,17 @@ Uses machine learning to predict the winner of the reality competition TV show, 
   - Automated LLM-analysis of players' Wiki descriptions/summaries (for each individual season) into social and strategy scores (b/w 1-10)
   - Continuous Probability Transformation of "Ranking" feature:
     - Chose a non-linear, exponential decay probability transformation function. One concern/challenge with this problem space is that once the tribe merge occurs in Survivor, it often becomes beneficial for strong players to try to keep bad players around until the end, with the hope that at the Final Trible Council, the strong player will be the clear winner pick amongst Jury Members; in other, simpler words (for anyone who doesn't watch the show), a strong player in power eventually wants to eliminate other threat competitors over less-threatening competitors. This phenomenon is challenging to incorporate into a machine learning model. However, by choosing a non-linear probability transformation function, more "weight" is added to winning players.
+      
       <img src="assets/img/exp-decay-probability-trans-function.png" width="500">
+      
     - Also considered a linear probability transformation function.
+      
       <img src="assets/img/linear-prob-trans-function.png" width="300">
+      
     - Initial expontential decay α-value of 0.2:
+      
       <img src="assets/img/exp-decay-alpha.png" width="600">
+      
     - The expontential decay α-value and choice of probability transformation function are hyperparemeters that will likely be explored further during Model Iteration/Refinement phase.
   - Normalized data as needed across historical seasons, as predictions for current season will be made week-to-week:
     - Ex #1: num_confessionals -> confessionals_per_epi. Chose to amortize this feature across number of episodes, as this feature is more of a representation of the storylines the producers want to tell, which is episode-to-episode.
