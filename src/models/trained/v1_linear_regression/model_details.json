@@ -1,0 +1,7 @@
+{
+  "transformation_func_type": "decay",
+  "alpha": 0.2,
+  "model_name": "v1_linear_regression",
+  "model_type": "linear",
+  "k": 1
+}
