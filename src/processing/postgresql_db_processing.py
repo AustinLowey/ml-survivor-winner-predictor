@@ -237,7 +237,8 @@ if __name__ == "__main__":
         # add_ranking_column(table_name)
         # drop_column_from_table(table_name, 'other_seasons')
         
-        # table_name = f"season_{season_number}_contestants"
+        table_name = f"seasons.season_{season_number}_contestants"
         # season_column = f"season{season_number}"
         # update_confessionals(table_name, df_confessionals[season_column])
-        add_challenges_amortized_column(table_name)
+        # add_challenges_amortized_column(table_name)
+        add_column_with_initial_value(table_name, 'season', initial_value=season_number, column_type="INTEGER")
