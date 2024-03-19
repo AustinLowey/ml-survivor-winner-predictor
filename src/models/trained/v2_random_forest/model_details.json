@@ -1,8 +1,8 @@
 {
   "prob_trans_func_type": "decay",
   "alpha": 0.2,
-  "model_name": "v1_linear_regression",
-  "model_type": "linear",
+  "model_name": "v2_random_forest",
+  "model_type": "random_forest",
   "k": 1,
   "test_val_percentage": 0.2,
   "features": [
