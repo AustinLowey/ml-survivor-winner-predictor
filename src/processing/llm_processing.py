@@ -4,6 +4,32 @@ from typing import Tuple
 from openai import OpenAI
 
 
+############################################### NOTES TO SELF: ###############################################
+#
+# Next time using this function, add explicit criteria to the social and strategy scoring.
+#
+# Social Score Criteria
+# The social score evaluates a contestant's interpersonal skills, likability, and ability to navigate and influence social dynamics.
+# 1) Alliance Formation and Maintenance: The ability to create and maintain alliances that further the contestant's game.
+# 2) Social Integration: Effectiveness in becoming a key member of the group, avoiding social isolation.
+# 3) Jury Management: Skill in managing relationships with eventual jury members, crucial for securing votes in the final.
+# 4) Conflict Resolution: Competence in resolving disputes in a way that does not jeopardize their standing in the game.
+#
+# Strategy Score Criteria
+# The strategy score assesses the contestant's game planning, tactical moves, and adaptability to changing dynamics.
+# 1) Strategic Planning: The ability to devise and implement plans that enhance their position in the game.
+# 2) Adaptability: Quick adjustment to new developments and ability to pivot strategies as the game evolves.
+# 3) Game-Changing Moves: Successfully executing moves that significantly alter the course of the game, including
+#    blindsides and effective use of immunity idols.
+#
+# Also, DEFINITELY use GPT 4 next time. After researching more, it is far superior than 3.5 in many metrics.
+#
+# May also just have the AI read transcripts and/or mass-scraped reddit posts from r/survivor instead of
+# Survivor Wiki descriptions. Every source will have at least some bias, but transcripts have the least possible.
+# 
+#############################################################################################################
+
+
 def ai_analyze_contestants(contestant_description: str) -> Tuple[int, int]:
     """
     Feed a summary description of a contestant's performance for a season into OpenAI LLM embedded in a prompt,
