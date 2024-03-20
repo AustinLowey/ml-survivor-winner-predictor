@@ -53,8 +53,8 @@ Python: scitkit-learn, pandas, NumPy
 - Model predictions using v2 (all predictions can be seen in src/models/trained/v2_random_forest/predictions.csv):
 
 <div align="center">
-  <img src="assets/img/v2-predictions-table.png" width="500" />
-  <img src="assets/img/v2-predictions-pie-chart.png" width="350" />
+  <img src="assets/img/v2-predictions-table.png" width="475" />
+  <img src="assets/img/v2-predictions-pie-chart.png" width="330" />
 </div>
 
 - v2 Random Forest model performed better than v1 model in MSE, MAE, and R^2:
