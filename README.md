@@ -52,11 +52,11 @@ Python: scitkit-learn, pandas, NumPy
 - Considered splitting data based on seasons and ensuring each data partition contained representation from early, mid and late seasons of the game (because as the game's dynamics, and therefore also the impact of my selected features, have shifted over time). However, using the linear probability transformation function described in the Feature Engineering section mitigates this issue, while also allowing for better generalization without getting fixed on season-specific nuances.
 - Model predictions using v2 (all predictions can be seen in src/models/trained/v2_random_forest/predictions.csv):
 
-  <img src="assets/img/v2-predictions.png" width="500">
+  <img src="assets/img/v2-predictions.png" width="600">
 
 - v2 Random Forest model performed better than v1 model in MSE, MAE, and R^2:
 
-  <img src="assets/img/v1-v2-performance-metrics.png" width="500">
+  <img src="assets/img/v1-v2-performance-metrics.png" width="400">
 
 ### ML Model Predictions
 - 3/19/2024 update - Currently entering this stage!
