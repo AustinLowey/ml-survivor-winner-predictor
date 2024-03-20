@@ -47,7 +47,7 @@ Continuous Probability Transformation of "Ranking" feature:
 Python: scitkit-learn, pandas, NumPy
 
 - Started with a Linear Regression model as a baseline (model v1); Random Forest Regression was used for model v2, with improvements on all metrics (MSE, MAE, R^2).
-- Model creation file (src/models/ml_modeling.py) was created to easily and modularly allow for new models to be generated.
+- Model-generation file (src/models/ml_modeling.py) was created to easily and modularly allow for new models to be generated.
 - Data was split 60%/20%/20% train/validation/test.
 - Considered splitting data based on seasons and ensuring each data partition contained representation from early, mid and late seasons of the game (because as the game's dynamics, and therefore also the impact of my selected features, have shifted over time). However, using the linear probability transformation function described in the Feature Engineering section mitigates this issue, while also allowing for better generalization without getting fixed on season-specific nuances.
 - Model predictions using v2 (all predictions can be seen in src/models/trained/v2_random_forest/predictions.csv):
