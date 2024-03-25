@@ -53,11 +53,11 @@ Python: scitkit-learn, pandas, NumPy
 
 Model predictions using v2 (all predictions can be seen in src/models/trained/v2_random_forest/predictions.csv):
 
-<img src="assets/img/v2-predictions-table.png" width="600"><br>
+<img src="assets/img/v2-predictions-table.png" width="900"><br>
   
 Model prediction differentials. Frequencies summarized in a pie chart:
 
-<img src="assets/img/v2-predictions-pie-chart.png" width="400"><br>
+<img src="assets/img/v2-predictions-pie-chart.png" width="450"><br>
 
 v2 Random Forest model performed better than v1 model in MSE, MAE, and R^2. Test and validation performance metrics for both v1 and v2 models:
 
@@ -66,7 +66,7 @@ v2 Random Forest model performed better than v1 model in MSE, MAE, and R^2. Test
 ### ML Model Predictions (Spoiler Alert for Current Season!)
 - Predictions for current/ongoing season (currently S46) applied on a weekly basis based on updated data:
 
-  <img src="assets/img/s46-w4-predictions.png" width="400"><br>
+  <img src="assets/img/s46-w4-predictions.png" width="350"><br>
   
 - Manual updating S46 data to start (to get some predictions ASAP); will be switching to an automated approach:
   - Automated approach will leverage LLM-analysis using OpenAI API, similar to how historical contestant descriptions were processed. May use episode transcripts and/or web scraped data from the Survivor subreddit.
