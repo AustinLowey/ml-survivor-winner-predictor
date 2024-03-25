@@ -63,11 +63,13 @@ v2 Random Forest model performed better than v1 model in MSE, MAE, and R^2. Test
 
 <img src="assets/img/v1-v2-performance-metrics.png" width="400">
 
-### ML Model Predictions
-- 3/19/2024 update - Currently entering this stage!
-- Will be applied to current/ongoing season (currently S46) on a weekly basis based on updated data, with week-to-week contestant placement predictions being tracked in a table.
-- Will manual enter S46 data for the first 1-2 weeks of predictions, then will switch to an automated approach shortly afterward.
-- Automated approach will leverage LLM-analysis using OpenAI API, similar to how historical contestant descriptions were processed. May use episode transcripts and/or web scraped data from the Survivor subreddit.
+### ML Model Predictions (Spoiler Alert for Current Season!)
+- Predictions for current/ongoing season (currently S46) applied on a weekly basis based on updated data:
+
+  <img src="assets/img/s46_w4_predictions.png" width="400"><br>
+  
+- Manual updating S46 data to start (to get some predictions ASAP); will be switching to an automated approach:
+  - Automated approach will leverage LLM-analysis using OpenAI API, similar to how historical contestant descriptions were processed. May use episode transcripts and/or web scraped data from the Survivor subreddit.
 - Once a season concludes, the data will be used for the next training iteration of the ML model, then be applied to the next season week-to-week.
 
 ### Model Iteration/Refinement
