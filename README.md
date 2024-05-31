@@ -7,7 +7,7 @@ Machine learning and Data ETL project to predict the winner of the reality compe
     <img src="/assets/img/presentation-thumbnail.png" alt="Presentation Thumbnail" width="500">
 </a>
 
-## Tools:
+### Tools:
 - Python
   - scikit-learn
   - pandas
@@ -18,8 +18,10 @@ Machine learning and Data ETL project to predict the winner of the reality compe
 - Databases
   - PostgreSQL
   - pgAdmin
+ 
+------
 
-## Key Components:
+# Project Key Components:
 ### Data Extraction, Transformation, and Loading
 Python: pandas, Beautiful Soup, psycopg2. Databases: PostgreSQL, pgAdmin
 
@@ -81,6 +83,13 @@ v2 Random Forest model performed better than v1 model in MSE, MAE, and R^2. Test
 
 <img src="assets/img/v1-v2-performance-metrics.png" width="400">
 
+v2 Random Forest model feature importances were:
+- num_idols_possessed: 0.077
+- social_score: 0.090
+- strategy_score: 0.239
+- challenge_wins_per_day_lasted: 0.285
+- confessionals_per_epi: 0.308
+
 ### ML Model Predictions (Spoiler Alert for Most Recent Season!)
 Week-to-week predictions for most recent season (46):
 
@@ -89,13 +98,7 @@ Week-to-week predictions for most recent season (46):
 - Manually updating S46 data. Future seasons will be automated.
   - Automated approach will leverage LLM-analysis using OpenAI API, similar to how historical contestant descriptions were processed. May use episode transcripts and/or web scraped data from the Survivor subreddit.
 - Once a season concludes, the data will be used for the next training iteration of the ML model.
-
-- v2 Random Forest model feature importances were:
-  - num_idols_possessed: 0.077
-  - social_score: 0.090
-  - strategy_score: 0.239
-  - challenge_wins_per_day_lasted: 0.285
-  - confessionals_per_epi: 0.308
+- 
 
 ### Model Iteration/Refinement
 Areas to explore in future model iterations:
