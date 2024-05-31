@@ -1,6 +1,8 @@
 # Survivor Winner Predictor
 Uses machine learning to predict the winner of the reality competition TV show, Survivor.
 
+[Project Presentation](./assets/AustinLowey_ML_Survivor.pdf)
+
 ## Key Components:
 ### Data Collection/Storage
 Python: pandas, Beautiful Soup, psycopg2. Databases: PostgreSQL, pgAdmin
