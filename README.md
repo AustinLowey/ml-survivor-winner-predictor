@@ -63,14 +63,14 @@ v2 Random Forest model performed better than v1 model in MSE, MAE, and R^2. Test
 
 <img src="assets/img/v1-v2-performance-metrics.png" width="400">
 
-### ML Model Predictions (Spoiler Alert for Current Season!)
-Predictions for current/ongoing season (currently S46) applied on a weekly basis based on updated data:
+### ML Model Predictions (Spoiler Alert for Most Recent Season!)
+Week-to-week predictions for most recent season (46):
 
-  <img src="assets/img/s46-w6-predictions.png" width="750"><br>
+  <img src="assets/img/s46-predictions-full.png" width="1000"><br>
   
-- Manually updating S46 data to start (to get some predictions ASAP); will be switching to an automated approach:
+- Manually updating S46 data. Future seasons will be automated.
   - Automated approach will leverage LLM-analysis using OpenAI API, similar to how historical contestant descriptions were processed. May use episode transcripts and/or web scraped data from the Survivor subreddit.
-- Once a season concludes, the data will be used for the next training iteration of the ML model, then be applied to the next season week-to-week.
+- Once a season concludes, the data will be used for the next training iteration of the ML model.
 
 ### Model Iteration/Refinement
 Areas to explore in future model iterations:
@@ -83,7 +83,7 @@ Areas to explore in future model iterations:
   - confessionals_per_epi: 0.308
 - Random Forest hyperparameter tuning
 - Changing α-value for probability transformation function (or even exploring different functions).
-- K-fold Cross-Validation. ML model creation file was built with K-fold CV already implemented, but executed with K=1 (i.e., no K-fold CV) for v1 and v2 models to establish simple baselines.
+- K-fold Cross-Validation depending on model type. ML model creation file was built with K-fold CV already implemented, but executed with K=1 (i.e., no K-fold CV) for v1 and v2 models to establish simple baselines.
 
 
 ## Tools:
@@ -97,5 +97,3 @@ Areas to explore in future model iterations:
 - Databases
   - PostgreSQL
   - pgAdmin
- 
-# More coming soon...
