@@ -1,10 +1,26 @@
 # Survivor Winner Predictor
-Uses machine learning to predict the winner of the reality competition TV show, Survivor.
+Machine learning and Data ETL project to predict the winner of the reality competition TV show, Survivor.
 
-[Project Presentation](./assets/AustinLowey_ML_Survivor.pdf)
+### [Project Presentation:](./assets/AustinLowey_ML_Survivor.pdf)
+
+<a href="./assets/AustinLowey_ML_Survivor.pdf">
+    <img src="/assets/img/presentation-thumbnail.png" alt="Presentation Thumbnail" width="500">
+</a>
+
+## Tools:
+- Python
+  - scikit-learn
+  - pandas
+  - NumPy
+  - Beautiful Soup / requests
+  - psycopg2
+  - openai (LLM API)
+- Databases
+  - PostgreSQL
+  - pgAdmin
 
 ## Key Components:
-### Data Collection/Storage
+### Data Extraction, Transformation, and Loading
 Python: pandas, Beautiful Soup, psycopg2. Databases: PostgreSQL, pgAdmin
 
 - Mass web scraping/parsing of the Survivor Wiki for data on ~700 contestants across 45 seasons
@@ -74,28 +90,21 @@ Week-to-week predictions for most recent season (46):
   - Automated approach will leverage LLM-analysis using OpenAI API, similar to how historical contestant descriptions were processed. May use episode transcripts and/or web scraped data from the Survivor subreddit.
 - Once a season concludes, the data will be used for the next training iteration of the ML model.
 
-### Model Iteration/Refinement
-Areas to explore in future model iterations:
-- Will at some point refine the "num_idols_possessed" feature, as well as potentially add/refine any other features.
 - v2 Random Forest model feature importances were:
   - num_idols_possessed: 0.077
   - social_score: 0.090
   - strategy_score: 0.239
   - challenge_wins_per_day_lasted: 0.285
   - confessionals_per_epi: 0.308
+
+### Model Iteration/Refinement
+Areas to explore in future model iterations:
+- Week-to-week predictions, as opposed to entire season
+  - Pro: Better at handling varying strategies in early vs. mid vs. late game
+  - Pro: Better approach to identify “goats” (i.e., less “threatening” players)
+  - Con: Requires ~15x more data
+- Will at some point refine the "num_idols_possessed" feature, as well as potentially add/refine any other features.
 - Random Forest hyperparameter tuning
 - Changing α-value for probability transformation function (or even exploring different functions).
+- Explore other model types.
 - K-fold Cross-Validation depending on model type. ML model creation file was built with K-fold CV already implemented, but executed with K=1 (i.e., no K-fold CV) for v1 and v2 models to establish simple baselines.
-
-
-## Tools:
-- Python
-  - scikit-learn
-  - pandas
-  - NumPy
-  - Beautiful Soup / requests
-  - psycopg2
-  - openai (LLM API)
-- Databases
-  - PostgreSQL
-  - pgAdmin
