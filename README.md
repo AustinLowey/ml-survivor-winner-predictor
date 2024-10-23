@@ -95,10 +95,9 @@ Week-to-week predictions for most recent season (46):
 
   <img src="assets/img/s46-predictions-full.png" width="1000"><br>
   
-- Manually updating S46 data. Future seasons will be automated.
+- Manually updated S46 data. Future seasons will be automated.
   - Automated approach will leverage LLM-analysis using OpenAI API, similar to how historical contestant descriptions were processed. May use episode transcripts and/or web scraped data from the Survivor subreddit.
-- Once a season concludes, the data will be used for the next training iteration of the ML model.
-- 
+- Once a season concludes, the data can be used for the next training iteration of the ML model.
 
 ### Model Iteration/Refinement
 Areas to explore in future model iterations:
