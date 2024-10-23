@@ -1,0 +1,4 @@
+# Ignore PostgreSQL dump files
+*.pgsql
+*.sql
+*.dump
