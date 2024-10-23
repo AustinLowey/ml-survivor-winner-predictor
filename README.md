@@ -1,4 +1,4 @@
-# Predicting Survivor Winners Using Machine Learning
+# Machine Learning - Predicting Survivor Winners
 Machine learning and Data ETL project to predict the winner of the reality competition TV show, Survivor.
 
 ### [Project Presentation:](./assets/AustinLowey_ML_Survivor.pdf)
