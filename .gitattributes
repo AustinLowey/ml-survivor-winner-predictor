@@ -1,4 +1,4 @@
 # Ignore PostgreSQL dump files
-*.pgsql
-*.sql
-*.dump
+*.pgsql linguist-detectable=false
+*.sql linguist-detectable=false
+*.dump linguist-detectable=false
